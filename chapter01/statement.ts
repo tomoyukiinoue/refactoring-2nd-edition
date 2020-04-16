@@ -3,12 +3,12 @@ export function statement(invoice, plays) {
   return renderPlainText(statementData, plays);
 
   function createStatementData() {
-    const statementData: any = {};
-    statementData.customer = invoice.customer;
-    statementData.performances = invoice.performances.map(enrichPerformance);
-    statementData.totalAmount = totalAmount(statementData);
-    statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-    return statementData;
+    const result: any = {};
+    result.customer = invoice.customer;
+    result.performances = invoice.performances.map(enrichPerformance);
+    result.totalAmount = totalAmount(result);
+    result.totalVolumeCredits = totalVolumeCredits(result);
+    return result;
   }
 
   function enrichPerformance(aPerformance) {
