@@ -21,12 +21,7 @@ export function createStatementData(invoice, plays) {
   }
 
   function volumeCreditsFor(aPerformance) {
-    let result = 0;
-    result += Math.max(aPerformance.audience - 30, 0);
-    // 喜劇のときは10人につき、さらにポイントを加算
-    if ('comedy' === aPerformance.play.type)
-      result += Math.floor(aPerformance.audience / 5);
-    return result;
+    return new PerformanceCalculator(aPerformance, playFor(aPerformance)).volumeCredits;
   }
 
   function totalAmount(data) {
@@ -68,6 +63,15 @@ class PerformanceCalculator {
       default:
         throw new Error(`unknown type: ${this.play.type}`);
     }
+    return result;
+  }
+
+  get volumeCredits() {
+    let result = 0;
+    result += Math.max(this.performance.audience - 30, 0);
+    // 喜劇のときは10人につき、さらにポイントを加算
+    if ('comedy' === this.play.type)
+      result += Math.floor(this.performance.audience / 5);
     return result;
   }
 }
