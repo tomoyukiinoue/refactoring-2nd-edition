@@ -1,28 +1,16 @@
 export function statement(invoice, plays) {
-  let statementData: any = {
-    customer: invoice.customer,
-    performances: invoice.performances.map(enrichPerformance),
-  };
-  statementData = {
-    ...statementData,
-    totalAmount: totalAmount(statementData),
-    totalVolumeCredits: totalVolumeCredits(statementData),
-  }
+  const statementData: any = {};
+  statementData.customer = invoice.customer;
+  statementData.performances = invoice.performances.map(enrichPerformance);
+  statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
   return renderPlainText(statementData, plays);
 
   function enrichPerformance(aPerformance) {
-    let result = {
-      ...aPerformance,
-      play: playFor(aPerformance),
-    };
-    result = {
-      ...result,
-      amount: amountFor(result),
-      volumeCredits: volumeCreditsFor(result),
-    };
-    result = {
-      ...result,
-    }
+    const result: any = { ...aPerformance };
+    result.play = playFor(aPerformance);
+    result.amount = amountFor(result);
+    result.volumeCredits = volumeCreditsFor(result);
     return result;
   }
 
