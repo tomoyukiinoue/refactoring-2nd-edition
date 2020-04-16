@@ -8,9 +8,9 @@ export function createStatementData(invoice, plays) {
   return result;
 
   function enrichPerformance(aPerformance) {
-    const calculator = new PerformanceCalculator(aPerformance);
+    const calculator = new PerformanceCalculator(aPerformance, playFor(aPerformance));
     const result: any = { ...aPerformance };
-    result.play = playFor(aPerformance);
+    result.play = calculator.play;
     result.amount = amountFor(result);
     result.volumeCredits = volumeCreditsFor(result);
     return result;
@@ -64,8 +64,10 @@ export function createStatementData(invoice, plays) {
 
 class PerformanceCalculator {
   performance: any;
+  play: any;
 
-  constructor(aPerformance) {
+  constructor(aPerformance, aPlay) {
     this.performance = aPerformance;
+    this.play = aPlay;
   }
 }
