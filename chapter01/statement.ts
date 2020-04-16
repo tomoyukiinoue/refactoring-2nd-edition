@@ -1,8 +1,8 @@
 export function statement(invoice, plays) {
-  const statementData: any = createStatementData();
+  const statementData: any = createStatementData(invoice, plays);
   return renderPlainText(statementData, plays);
 
-  function createStatementData() {
+  function createStatementData(invoice, plays) {
     const result: any = {};
     result.customer = invoice.customer;
     result.performances = invoice.performances.map(enrichPerformance);
